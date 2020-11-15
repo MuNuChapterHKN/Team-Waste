@@ -23,8 +23,8 @@ mosquitto
 More infos on how to configure mosquitto here: https://mosquitto.org/man/mosquitto-conf-5.html
 
 If you are on linux the mosquitto broker is up and running, execute the 2 python scripts in this folder in 2 different terminals in the following order:
-- mqtt_subscriber
-- mqtt_publisher
+- mqtt_subscriber.py
+- mqtt_publisher.py
 
 If you are on Windows it is necessary to open a port on the firewall in order to send and receive traffic
 
@@ -32,7 +32,7 @@ If you are on Windows it is necessary to open a port on the firewall in order to
 - Go to Windows Firewall with Advanced Security
 - Click on Inbound Rules and then on the right: Add a new Rule
 - Set rule type as Port
-- Enter as specific local port 1883
+- Enter a specific local port in which the server is running; in this case: 1883 (default port for MQTT)
 - Set TCP Port
 - In the following tab select: Allow the connection
 - Set wheter this rule applies (for simplicity check all)
