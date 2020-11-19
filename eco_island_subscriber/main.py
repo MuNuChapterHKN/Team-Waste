@@ -10,15 +10,17 @@ import sqlite3
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+import ch_data
+import tabella
 
 def on_subscribe(client, obj, mid, granted_qos):
-    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+	print("Subscribed: " + str(mid) + " " + str(granted_qos))
 def on_message(client, obj, msg):
-    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+	print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
 def on_connect(client, userdata, flags, rc):
-    print("rc: " + str(rc))
+	print("rc: " + str(rc))
 def on_publish(client, obj, mid):
-    print("mid: " + str(mid))
+	print("mid: " + str(mid))
 
 # -----------------------------------------------------------------------
 # Qui prima va inserita la parte di creazione della connessione al server
