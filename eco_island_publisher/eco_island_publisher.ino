@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 
 // Replace the next variables with your SSID/Password combination
-char ssid[23] = "REPLACE_WITH_YOUR_SSID"; // change number accordingly
-char password[27] = "REPLACE_WITH_YOUR_PASSWORD"; // change number accordingly
+char ssid[23] = "REPLACE_WITH_YOUR_SSID"; // change string accordingly
+char password[27] = "REPLACE_WITH_YOUR_PASSWORD"; // change string accordingly
 
 // Add your MQTT Broker IP address
 const char* mqtt_server = "127.0.0.1";
@@ -49,7 +49,7 @@ void loop() {
     dtostrf(temp, 1, 2, tempString);
     Serial.println("Temperature: ");
     Serial.println(tempString);
-    client.publish("esp32/temperature", tempString);
+    client.publish("esp32/sensor", tempString);
   }
 }
 
@@ -93,11 +93,11 @@ void callback(char* topic, byte* message, unsigned int length) {
     Serial.print("Changing output to ");
     if(messageTemp == "on"){
       Serial.println("on");
-      //digitalWrite(ledPin, HIGH);
+      // TODO digitalWrite(ledPin, HIGH);
     }
     else if(messageTemp == "off"){
       Serial.println("off");
-      //digitalWrite(ledPin, LOW);
+      // TODO digitalWrite(ledPin, LOW);
     }
   }
 }
