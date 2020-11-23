@@ -8,7 +8,7 @@ def on_connect(client, userdata, flags, rc):
   client.subscribe("esp32/sensor")
 
 def on_message(client, userdata, msg):
-  print(msg)
+  print(msg.payload.decode())
   if msg.payload.decode() == "disconnect":
     client.disconnect()
     
