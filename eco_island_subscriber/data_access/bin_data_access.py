@@ -8,5 +8,5 @@ def get_bin_island_id(bin_id):
     SELECT island_id FROM bin WHERE id = {bin_id} ;
     """
     res = utils.execute_select_one_query(get_from_table)
-    island_id = res[0]
+    island_id = res['island_id']
     return island_id

@@ -35,3 +35,10 @@ CREATE TABLE `threekeco`.`infrared_sensor` (
   `value` FLOAT NOT NULL,
   `measured_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `threekeco`.`sensor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `bin_id` INT NOT NULL,
+  `type` INT NOT NULL,
+  `created_on` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));

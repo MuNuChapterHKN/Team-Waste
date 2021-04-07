@@ -3,6 +3,9 @@
 import paho.mqtt.client as mqtt
 import data_access.volume_sensor_data_access as vsda
 import data_access.bin_data_access as bda
+import data_access.sensor_data_access as sda
+import data_access.load_sensor_data_access as lsda
+import data_access.infrared_sensor_data_access as isda
 
 def on_message(client, userdata, message):
     print("message received " ,str(message.payload.decode("utf-8")))
@@ -14,14 +17,25 @@ def on_message(client, userdata, message):
     fields = messaggio.split(" ")
     print(fields)
 
-    bin_id = fields[0]
-    # sensor_id = fields[1]
-    # timestamp = fields[2]
-    measured_value = fields[3]
+    sensor_id = fields[0]
+    # timestamp = fields[1]
+    measured_value = fields[2]
+    # bin id and type of the sensor
+    sensor = sda.get_sensor(sensor_id)
+    bin_id = sensor['bin_id']
+    sensor_type = sensor['type']
     # get island id given the bin id
     island_id = bda.get_bin_island_id(bin_id)
-    # save into db
-    vsda.add_measurement_value(bin_id, island_id, measured_value)
+    # save into db according to type
+    if sensor_type == 1:
+        isda.add_measurement_value(bin_id, island_id, measured_value)
+    elif sensor_type == 2:
+        lsda.add_measurement_value(bin_id, island_id, measured_value)
+    elif sensor_type == 3:
+        vsda.add_measurement_value(bin_id, island_id, measured_value)
+    else:
+        print("undefined sensor type")
+    
 
 broker_address="localhost"  #qua va inserito l'indirizzo ip del broker 
 

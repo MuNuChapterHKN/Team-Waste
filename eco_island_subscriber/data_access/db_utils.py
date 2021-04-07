@@ -34,10 +34,11 @@ def execute_select_one_query(query):
     try:
         cursor.execute(query)
         result = None
-        result = cursor.fetchone()        
+        result = cursor.fetchone()    
+        row = dict(zip(cursor.column_names, result))    
         print("Select One Query successful")
         cursor.close()
-        return result
+        return row
     except Error as err:
         print(f"Error: '{err}'") 
 
