@@ -1,7 +1,11 @@
-import mysql.connector
-from mysql.connector import Error
-import pandas as pd
+#!/usr/bin/python3
+
 import paho.mqtt.client as mqtt
+import data_access.volume_sensor_data_access as vsda
+import data_access.bin_data_access as bda
+import data_access.sensor_data_access as sda
+import data_access.load_sensor_data_access as lsda
+import data_access.infrared_sensor_data_access as isda
 
 def on_message(client, userdata, message):
     print("message received " ,str(message.payload.decode("utf-8")))
@@ -12,75 +16,26 @@ def on_message(client, userdata, message):
     #IDEAL FORMAT: bin_id SENSOR_ID timestamp samp --> separati da tab
     fields = messaggio.split(" ")
     print(fields)
-    add_to_table = f"""
-    INSERT INTO epics_table (bin_id,sensor_id,timestamp,samp) VALUES ({fields[0]},{fields[1]},{fields[2]},{fields[3]});
-    """
-    connection = create_db_connection("localhost", "root", "Rumapark97", "Epics_project") # Connect to the Database
-    execute_query(connection, add_to_table) # Execute our defined query
 
-def create_database(connection, query):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Database created successfully")
-    except Error as err:
-        print(f"Error: '{err}'")
-def execute_query(connection, query):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        connection.commit()
-        print("Query successful")
-    except Error as err:
-        print(f"Error: '{err}'")     
-
-def create_server_connection(host_name, user_name, user_password):
-    connection = None
-    try:
-        connection = mysql.connector.connect(
-            host=host_name,
-            user=user_name,
-            passwd=user_password
-        )
-        print("MySQL Database connection successful")
-    except Error as err:
-        print(f"Error: '{err}'")
-
-    return connection
-
-def create_db_connection(host_name, user_name, user_password, db_name):
-    connection = None
-    try:
-        connection = mysql.connector.connect(
-            host=host_name,
-            user=user_name,
-            passwd=user_password,
-            database=db_name
-        )
-        print("MySQL Database connection successful")
-    except Error as err:
-        print(f"Error: '{err}'")
-
-    return connection
-
-connection = create_server_connection("localhost", "root", "Rumapark97") # Connect to the serve
-query = "CREATE DATABASE IF NOT EXISTS Epics_project"
-create_database(connection, query)
-connection = create_db_connection("localhost", "root", "Rumapark97", "Epics_project") # Directly connect to the database
-
-
-create_epics_table = """
-      CREATE TABLE IF NOT EXISTS epics_table (
-      bin_id  int NOT NULL PRIMARY KEY,
-      sensor_id  int NOT NULL PRIMARY KEY,
-      timestamp VARCHAR(40) NOT NULL PRIMARY KEY,
-      samp VARCHAR(40)
-      );
-    """
-        #cerca mysqu timestamp formato
-
-execute_query(connection, create_epics_table) # Execute our defined query
-
+    sensor_id = fields[0]
+    # timestamp = fields[1]
+    measured_value = fields[2]
+    # bin id and type of the sensor
+    sensor = sda.get_sensor(sensor_id)
+    bin_id = sensor['bin_id']
+    sensor_type = sensor['type']
+    # get island id given the bin id
+    island_id = bda.get_bin_island_id(bin_id)
+    # save into db according to type
+    if sensor_type == 1:
+        isda.add_measurement_value(bin_id, island_id, measured_value)
+    elif sensor_type == 2:
+        lsda.add_measurement_value(bin_id, island_id, measured_value)
+    elif sensor_type == 3:
+        vsda.add_measurement_value(bin_id, island_id, measured_value)
+    else:
+        print("undefined sensor type")
+    
 
 broker_address="localhost"  #qua va inserito l'indirizzo ip del broker 
 
