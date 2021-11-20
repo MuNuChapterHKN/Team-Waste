@@ -3,7 +3,7 @@ CREATE TABLE `threekeco`.`island` (
   `name` TINYTEXT NOT NULL,
   `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `NAME_UNIQUE` (`name` ASC));
+  UNIQUE INDEX `NAME_UNIQUE` (`name`(32) ASC));
 
 CREATE TABLE `threekeco`.`bin` (
   `id` INT NOT NULL AUTO_INCREMENT,
