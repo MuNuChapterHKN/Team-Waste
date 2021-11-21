@@ -19,3 +19,5 @@ CUBEJS_DB_USER={user}
 CUBEJS_DB_PASS={password}
 CUBEJS_DB_NAME={database_name}
 ```
+
+Run `npm run dev` to start the playground on port 4000
