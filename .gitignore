@@ -130,3 +130,10 @@ dmypy.json
 
 # OS generated files
 .DS_Store
+
+
+# Node packages
+analytics_dashboard/node_modules
+# Database connection details
+analytics_dashboard/.env
+analytics_dashboard/.cubestore
