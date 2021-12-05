@@ -133,7 +133,7 @@ dmypy.json
 
 
 # Node packages
-analytics_dashboard/node_modules
+*/**/node_modules
 # Database connection details
-analytics_dashboard/.env
-analytics_dashboard/.cubestore
+analytics_dashboard/backend/.env
+analytics_dashboard/backend/.cubestore/
