@@ -29,4 +29,6 @@
 
 </div>
 
+{:catch}
+<div class='btn btn-error'>Loading error</div>
 {/await}
