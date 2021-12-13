@@ -8,18 +8,20 @@ import ScalarStats from "$lib/ScalarStats.svelte";
 </h1>
 
 
-<div class='grid grid-cols-6 w-full items-center'>
-    <div class='col-span-full text-center'>
-        <!-- <BinStats /> -->
+<div class='grid grid-cols-6 w-full justify-items-center'>
+    <div class='col-span-full'>
         
-        <ScalarStats queries={[{
-            title: "Number of bins",
-            query: { measures: ['Bin.count'] }
-        },
-        {
-            title: "Number of islands",
-            query: { measures: ['Island.count'] }
-        }]}></ScalarStats>
+        <ScalarStats queries={[
+            {
+                title: "Number of bins",
+                query: { measures: ['Bin.count'] }
+            },
+            {
+                title: "Number of islands",
+                query: { measures: ['Island.count'] }
+            }
+        ]}></ScalarStats>
+
     </div>
 </div>
 
