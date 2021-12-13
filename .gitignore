@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/ # Don't mess with svelte
 lib64/
 parts/
 sdist/
