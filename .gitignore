@@ -137,3 +137,4 @@ dmypy.json
 # Database connection details
 analytics_dashboard/backend/.env
 analytics_dashboard/backend/.cubestore/
+analytics_dashboard/frontend/static/styles.css
