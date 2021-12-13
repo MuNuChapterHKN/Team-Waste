@@ -7,8 +7,8 @@ import BinStats from "$lib/BinStats.svelte";
 </h1>
 
 
-<div class='grid grid-cols-6 text-center'>
-    <div class="">
+<div class='grid grid-cols-6 w-full items-center'>
+    <div class='col-span-full text-center'>
         <BinStats />
     </div>
 </div>

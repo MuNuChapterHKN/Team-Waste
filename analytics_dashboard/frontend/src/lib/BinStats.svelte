@@ -4,23 +4,34 @@ import { onMount } from "svelte";
 import { cubeClient } from "./stores";
 
 
-    let count = 0;
+    let binCount = 0;
+    let islandCount = 0;
+
 
     onMount(async () => {
-        let result = await $cubeClient.load({
+        $cubeClient.load({
             measures: ['Bin.count']
-        });
+        }).then(r => {
+            binCount = r.series()[0].series[0].value
+        })
         
-        console.log(result.series());
 
-        count = result.series()[0].series[0].value
-})
+        $cubeClient.load({
+            measures: ['Island.count']
+        }).then(r => {
+            islandCount = r.series()[0].series[0].value
+        })
+    })
 </script>
 
 
-<div class="stats shadow">
+<div class="stats shadow ">
     <div class="stat">
-        <div class='stat-title'>Total number of bins</div>
-        <div class='stat-value'>{count}</div>
+        <div class='stat-title'>Number of bins</div>
+        <div class='stat-value'>{binCount}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">Number of islands</div>
+        <div class="stat-value">{islandCount}</div>
     </div>
 </div>
