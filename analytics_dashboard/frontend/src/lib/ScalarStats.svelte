@@ -1,4 +1,4 @@
-<script lang='typescript'>
+<script lang='ts'>
     import type { ScalarQuery } from '../types/scalar_query.type'
     import { cubeClient } from './stores';
     
