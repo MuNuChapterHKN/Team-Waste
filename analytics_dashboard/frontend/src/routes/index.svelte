@@ -1,5 +1,6 @@
 <script>
 // import BinStats from "$lib/BinStats.svelte";
+import ChartFirst from "$lib/ChartFirst.svelte";
 import ScalarStats from "$lib/ScalarStats.svelte";
 
 </script>
@@ -8,8 +9,8 @@ import ScalarStats from "$lib/ScalarStats.svelte";
 </h1>
 
 
-<div class='grid grid-cols-6 w-full justify-items-center'>
-    <div class='col-span-full'>
+<div class='grid sm:grid-cols-6 md:grid-cols-9 w-full justify-items-center'>
+    <div class='col-span-full justify-self-center'>
         
         <ScalarStats queries={[
             {
@@ -23,8 +24,24 @@ import ScalarStats from "$lib/ScalarStats.svelte";
         ]}></ScalarStats>
 
     </div>
+    
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+    <div class='col-span-3 justify-self-center'>
+        <ChartFirst />
+    </div>
+
 </div>
-
-
-<style>
-</style>

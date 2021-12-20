@@ -1,7 +1,7 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.svelte'],
-  darkMode: false, // or 'media' or 'class'
+  // purge: ['./src/**/*.svelte'],
+  content: ['./src/**/*.svelte'],
+  // darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
@@ -9,6 +9,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('daisyui'),
+    require('daisyui')
   ],
 }
