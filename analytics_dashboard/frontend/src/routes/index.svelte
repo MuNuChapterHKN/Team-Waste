@@ -1,6 +1,6 @@
 <script>
 // import BinStats from "$lib/BinStats.svelte";
-import ChartFirst from "$lib/ChartFirst.svelte";
+import LineChart from "$lib/LineChart.svelte";
 import ScalarStats from "$lib/ScalarStats.svelte";
 
 </script>
@@ -25,23 +25,28 @@ import ScalarStats from "$lib/ScalarStats.svelte";
 
     </div>
     
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
-    </div>
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
-    </div>
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
-    </div>
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
-    </div>
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
-    </div>
-    <div class='col-span-3 justify-self-center'>
-        <ChartFirst />
+    <!-- <div class='col-span-3 justify-self-center'> -->
+        <!-- <ChartFirst /> -->
+    <!-- </div> -->
+    
+
+    <div class='col-span-full'>
+        <LineChart query={{ query: {
+            measures: [
+              'infrared_sensor.activations'
+            ],
+            'timeDimensions':  [
+              {
+                dimension: 'infrared_sensor.measuredOn',
+                granularity: 'day'
+              }
+            ],
+            filters: [],
+            dimensions: [
+                'Bin.category'
+            ]
+         }}} />
+
     </div>
 
 </div>
