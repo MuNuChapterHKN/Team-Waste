@@ -2,5 +2,6 @@ import type { Query } from "@cubejs-client/core";
 
 export type TimeQuery = {
     query: Query,
-    colors?: string[]
+    colors?: string[],
+    colorScheme?: string
 }

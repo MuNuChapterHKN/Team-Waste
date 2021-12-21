@@ -15,7 +15,7 @@
 
 {#await getResults()}
 
-<div class="btn loading">Loading</div>
+<div class="btn loading m-8">Loading</div>
 
 {:then list} 
 
@@ -30,5 +30,5 @@
 </div>
 
 {:catch}
-<div class='btn btn-error'>Loading error</div>
+<div class='btn btn-error m-8'>Loading error</div>
 {/await}

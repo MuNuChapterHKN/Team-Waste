@@ -1,5 +1,4 @@
 <script>
-// import BinStats from "$lib/BinStats.svelte";
 import LineChart from "$lib/LineChart.svelte";
 import ScalarStats from "$lib/ScalarStats.svelte";
 
@@ -25,10 +24,6 @@ import ScalarStats from "$lib/ScalarStats.svelte";
 
     </div>
     
-    <!-- <div class='col-span-3 justify-self-center'> -->
-        <!-- <ChartFirst /> -->
-    <!-- </div> -->
-    
 
     <div class='col-span-full'>
         <LineChart query={{ query: {
@@ -45,7 +40,7 @@ import ScalarStats from "$lib/ScalarStats.svelte";
             dimensions: [
                 'Bin.category'
             ]
-         }}} />
+         }, colorScheme: 'weird'}} />
 
     </div>
 
