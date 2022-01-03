@@ -8,7 +8,7 @@ import ScalarStats from "$lib/ScalarStats.svelte";
 </h1>
 
 
-<div class='grid sm:grid-cols-6 md:grid-cols-9 w-full justify-items-center'>
+<div class='grid sm:grid-cols-6 md:grid-cols-9 w-full justify-items-center  gap-2'>
     <div class='col-span-full justify-self-center'>
         
         <ScalarStats queries={[
@@ -25,7 +25,7 @@ import ScalarStats from "$lib/ScalarStats.svelte";
     </div>
     
 
-    <div class='col-span-full'>
+    <div class='col-span-full shadow'>
         <LineChart query={{ query: {
             measures: [
               'infrared_sensor.activations'
