@@ -19,10 +19,10 @@
   <div class="btn loading m-8">Loading</div>
 {:then list}
   <div class="stats shadow">
-    {#each list as single}
-      <div class="stat">
-        <div class="stat-title">{single.title}</div>
-        <div class="stat-value">{single.value}</div>
+    {#each list as metric}
+      <div class="stat text-center">
+        <div class="stat-title">{metric.title}</div>
+        <div class="stat-value">{metric.value}</div>
       </div>
     {/each}
   </div>
