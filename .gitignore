@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/ # Don't mess with svelte
 lib64/
 parts/
 sdist/
@@ -137,3 +137,5 @@ dmypy.json
 # Database connection details
 analytics_dashboard/backend/.env
 analytics_dashboard/backend/.cubestore/
+analytics_dashboard/frontend/static/styles.css
+analytics_dashboard/dev.sh
