@@ -138,3 +138,4 @@ dmypy.json
 analytics_dashboard/backend/.env
 analytics_dashboard/backend/.cubestore/
 analytics_dashboard/frontend/static/styles.css
+analytics_dashboard/dev.sh

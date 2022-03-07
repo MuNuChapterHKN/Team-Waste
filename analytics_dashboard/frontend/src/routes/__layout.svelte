@@ -1,3 +1,7 @@
-<div class='max-w-5xl mx-auto px-5'>
-    <slot/>
-</div>
+<script>
+  import Container from "$lib/layouts/Container.svelte";
+</script>
+
+<Container>
+  <slot />
+</Container>

@@ -1,5 +1,5 @@
-import cubejs from "@cubejs-client/core";
-import { readable } from "svelte/store";
+import cubejs, { movePivotItem, ResultSet } from "@cubejs-client/core";
+import { readable, writable } from "svelte/store";
 
 export let cubeClient = readable(
     cubejs('token', {
