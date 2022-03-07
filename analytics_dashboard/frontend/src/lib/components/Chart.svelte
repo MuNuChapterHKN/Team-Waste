@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type { ChartData, ChartOptions } from "chart.js/auto";
   import Chart from "chart.js/auto";
   import { onMount } from "svelte";
+
+  import type { ChartData, ChartOptions } from "chart.js/auto";
 
   export let data: ChartData;
   export let options: ChartOptions = {

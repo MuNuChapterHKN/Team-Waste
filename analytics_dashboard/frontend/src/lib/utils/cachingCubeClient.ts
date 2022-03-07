@@ -1,6 +1,8 @@
 import { cubeClient } from "$lib/stores";
 import type { CubejsApi, Query, ResultSet } from "@cubejs-client/core";
 
+// TODO: persistence with LocalStorage
+
 class AnyCache<K, T> {
   // Composition rather than inheritance, to model the types better
   private _map: Map<string, T>;

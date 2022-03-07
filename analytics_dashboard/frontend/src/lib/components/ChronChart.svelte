@@ -1,7 +1,9 @@
 <script lang="ts">
   import Chart from "$lib/components/Chart.svelte";
+
   import { cachedCubeLoad } from "$lib/utils/cachingCubeClient";
-  import { cubeDataToLineData } from "$lib/utils";
+  import { cubeDataToLineData } from "$lib/utils/mappers";
+
   import type { Query } from "@cubejs-client/core";
 
   export let query: Query;

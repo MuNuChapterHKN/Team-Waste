@@ -1,12 +1,16 @@
 <script lang="ts">
-  import ChronChart from "$lib/components/ChronChart.svelte";
+  // Layout components
   import Cell from "$lib/layouts/Cell.svelte";
   import CenterBanner from "$lib/layouts/CenterBanner.svelte";
   import Grid from "$lib/layouts/Grid.svelte";
-  import ScalarStats from "$lib/components/ScalarStats.svelte";
-  import type { Query } from "@cubejs-client/core";
-  import Container from "$lib/layouts/Container.svelte";
   import Divider from "$lib/layouts/Divider.svelte";
+
+  // Stateful components
+  import ChronChart from "$lib/components/ChronChart.svelte";
+  import ScalarStats from "$lib/components/ScalarStats.svelte";
+
+  // Types
+  import type { Query } from "@cubejs-client/core";
 
   const exampleQuery: Query = {
     measures: ["infrared_sensor.activations"],
