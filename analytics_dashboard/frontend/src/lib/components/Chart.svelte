@@ -29,8 +29,6 @@
     console.debug(`updateCount: ${updateCount}`);
 
     if (updateCount > 1) {
-      console.debug("Data was updated");
-
       chart.data = newData;
       chart.update();
       console.debug("updateData called", updateCount);
