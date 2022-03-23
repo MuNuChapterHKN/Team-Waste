@@ -22,6 +22,8 @@
     });
   });
 
+  // updateCount is used to count the number of updates to data
+  // `chart.update()` is not called on the first render
   let updateCount = 0;
   const updateData = (newData: ChartData) => {
     updateCount++;

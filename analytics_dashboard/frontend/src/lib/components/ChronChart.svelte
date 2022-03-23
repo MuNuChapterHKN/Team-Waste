@@ -3,22 +3,39 @@
 
   import { cachedCubeLoad } from "$lib/utils/cachingCubeClient";
   import { cubeDataToLineData } from "$lib/utils/mappers";
+  import { writable } from "svelte/store";
 
-  import type { Query } from "@cubejs-client/core";
+  import type { Query, ResultSet } from "@cubejs-client/core";
+  import type { Writable } from "svelte/store";
 
   export let query: Query;
   export let colors: string[] | string;
 
-  // TODO: Add button to change granularity from ui
-  query.timeDimensions = query.timeDimensions.map((td) => {
-    return { ...td, granularity: "day" };
+  let granularity: 'day'|'hour'|'minute'|'second' = 'day';
+
+  const handleClick = () => {
+    granularity = granularity == 'day' ? 'hour' : 'day';
+  }
+
+  // TODO: limit number of datapoints
+  $: query.timeDimensions = query.timeDimensions.map((td) => {
+    return { ...td, granularity: granularity };
   });
+
+  const result: Writable<ResultSet|null> = writable(null);
+  
+  const loadData = (q: Query) => {
+    cachedCubeLoad(q)
+      .then(data => result.set(data));
+  }
+
+  $: loadData(query)
 </script>
 
-{#await cachedCubeLoad(query)}
+
+{#if $result == null}
   <p class="p-5">Loading...</p>
-{:then data}
-  <Chart data={cubeDataToLineData(data, query, colors)} type={"line"} />
-{:catch err}
-  <p class="text-red-500">Error message: {err}</p>
-{/await}
+{:else}
+  <button on:click={handleClick}>switch granularity</button>
+  <Chart data={cubeDataToLineData($result, colors)} type={"line"} />
+{/if}
