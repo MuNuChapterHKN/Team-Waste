@@ -1,5 +1,7 @@
-import { cubeClient } from "$lib/stores";
 import type { CubejsApi, Query, ResultSet } from "@cubejs-client/core";
+import cubejs from "@cubejs-client/core";
+import { readable } from "svelte/store";
+import { apiPath, apiToken } from "./variables";
 
 // TODO: persistence with LocalStorage
 
@@ -28,8 +30,9 @@ class AnyCache<K, T> {
   }
 }
 
-let currentClient: CubejsApi;
-cubeClient.subscribe((c) => (currentClient = c));
+let cubeClient = cubejs(apiToken, {
+  apiUrl: apiPath,
+});
 
 const queryCache: AnyCache<Query, Promise<ResultSet>> = new AnyCache();
 
@@ -43,7 +46,7 @@ export const cachedCubeLoad = (query: Query): Promise<ResultSet> => {
   console.debug(
     `Cache miss, making request, chache size ${queryCache.size}, id: ${id}`
   );
-  const r = currentClient.load(query);
+  const r = cubeClient.load(query);
   queryCache.set(query, r);
   return r;
 };

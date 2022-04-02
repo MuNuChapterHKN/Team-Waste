@@ -1,6 +1,5 @@
 import type { CubejsApi, Query, ResultSet } from "@cubejs-client/core";
 import type { ChartData } from "chart.js";
-import type { TimeQuery } from "src/types/time_query.type";
 
 // TODO: Get evenly spaced colors
 function randomColor() {
@@ -9,7 +8,6 @@ function randomColor() {
 
 export const cubeDataToLineData = (
   cubeData: ResultSet,
-  query: Query,
   colors?: string | string[]
 ): ChartData => {
   const series = cubeData.series();
