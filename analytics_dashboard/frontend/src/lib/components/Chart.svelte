@@ -9,7 +9,7 @@
     responsive: true,
     aspectRatio: 1.9,
   };
-  export let type: "line";
+  export let type: "line"|"pie";
 
   let chartElement;
   let chart: Chart;
