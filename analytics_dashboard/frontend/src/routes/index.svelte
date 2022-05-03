@@ -11,6 +11,7 @@
 
   // Types
   import type { Query } from "@cubejs-client/core";
+  import PieChart from "$lib/components/PieChart.svelte";
 
   const exampleQuery: Query = {
     measures: ["infrared_sensor.activations"],
@@ -49,15 +50,15 @@
     <ChronChart query={exampleQuery} colors={undefined} />
   </Cell>
   <Cell>
-    <ChronChart query={exampleQuery} colors={undefined} />
-  </Cell>
-  <Cell>
-    <ChronChart query={exampleQuery} colors={undefined} />
-  </Cell>
-  <Cell>
-    <ChronChart query={exampleQuery} colors={undefined} />
-  </Cell>
-  <Cell>
-    <ChronChart query={exampleQuery} colors={undefined} />
+    <PieChart
+      query={{
+        measures: ["infrared_sensor.activations"],
+        timeDimensions: [],
+        order: { "infrared_sensor.activations": "desc" },
+        filters: [],
+        dimensions: ["Bin.category"],
+      }}
+      colors={undefined}
+    />
   </Cell>
 </Grid>
