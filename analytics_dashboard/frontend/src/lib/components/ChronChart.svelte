@@ -23,15 +23,15 @@
       granularity === Granularity.Day ? Granularity.Hour : Granularity.Day;
   };
 
-  // TODO: limit number of datapoints
   // const dateRange = {
   //   hour: "Today",
   //   day: "This month",
   // };
+  query.limit = 48;
   $: query.timeDimensions = query.timeDimensions.map((td) => {
     return {
       ...td,
-      granularity: granularity,
+      granularity,
       // dateRange: dateRange[granularity],
     };
   });
