@@ -13,6 +13,7 @@
   import type { Query } from "@cubejs-client/core";
   import PieChart from "$lib/components/PieChart.svelte";
   import ColorChooser from "$lib/components/ColorChooser.svelte";
+  import { dev } from "$app/env";
 
   const exampleQuery: Query = {
     measures: ["infrared_sensor.activations"],
@@ -27,7 +28,9 @@
   };
 </script>
 
-<ColorChooser />
+{#if dev}
+  <ColorChooser />
+{/if}
 
 <h1 class="text-2xl font-medium mt-4">This is the homepage</h1>
 
