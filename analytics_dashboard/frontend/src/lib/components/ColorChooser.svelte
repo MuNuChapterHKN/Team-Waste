@@ -9,7 +9,7 @@
       <div>{color}</div>
     </div>
   {/each}
-  {#if $selectedColors.length < 5}
+  {#if $selectedColors.length < 10}
     <button
       class="btn btn-primary"
       on:click={() => {
