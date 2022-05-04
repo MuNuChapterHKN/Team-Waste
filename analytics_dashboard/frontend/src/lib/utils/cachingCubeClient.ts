@@ -40,12 +40,12 @@ const id = Math.random();
 
 export const cachedCubeLoad = (query: Query): Promise<ResultSet> => {
   if (queryCache.has(query)) {
-    console.debug("Cache hit", queryCache.size);
+    // console.debug("Cache hit", queryCache.size);
     return queryCache.get(query);
   }
-  console.debug(
-    `Cache miss, making request, chache size ${queryCache.size}, id: ${id}`
-  );
+  // console.debug(
+  //   `Cache miss, making request, chache size ${queryCache.size}, id: ${id}`
+  // );
   const r = cubeClient.load(query);
   queryCache.set(query, r);
   return r;

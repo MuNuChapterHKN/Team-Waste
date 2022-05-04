@@ -1,4 +1,4 @@
-<div class="container mx-auto pl-2 pr-2">
+<div class="container mx-auto px-10">
   <slot />
 </div>
 

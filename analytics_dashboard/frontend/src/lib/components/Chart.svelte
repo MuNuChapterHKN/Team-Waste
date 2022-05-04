@@ -9,7 +9,7 @@
     responsive: true,
     aspectRatio: 1.9,
   };
-  export let type: "line"|"pie";
+  export let type: "line" | "pie";
 
   let chartElement;
   let chart: Chart;
@@ -28,12 +28,12 @@
   const updateData = (newData: ChartData) => {
     updateCount++;
 
-    console.debug(`updateCount: ${updateCount}`);
+    // console.debug(`updateCount: ${updateCount}`);
 
     if (updateCount > 1) {
       chart.data = newData;
       chart.update();
-      console.debug("updateData called", updateCount);
+      // console.debug("updateData called", updateCount);
     }
   };
 

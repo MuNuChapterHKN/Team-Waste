@@ -18,7 +18,7 @@ export const cubeDataToLineData = (
     labels: series[0].series.map((entry) => entry.x), // All datasets should have the same values as x
     datasets: series.map((s, i) => {
       const color: string =
-        colors == undefined ? randomColor() : colors[i%n];
+        colors == undefined ? randomColor() : colors[i % colors.length];
 
       return {
         label: s.title.split(",")[0],
@@ -42,16 +42,19 @@ export const cubeDataToPieData = (
   const s = series[0].series;
   const n = s.length;
   const backgrounds: string[] = [];
-  for (let i=0; i<n; i++) {
-    backgrounds[i] = colors === undefined ? randomColor() : colors[i%n];
+  for (let i = 0; i < n; i++) {
+    backgrounds[i] =
+      colors === undefined ? randomColor() : colors[i % colors.length];
   }
 
   return {
-    labels: s.map(e => e.x),
-    datasets: [{
-      label: series[0].key,
-      data: s.map(e => e.value),
-      backgroundColor: backgrounds
-    }]
-  }
-}
+    labels: s.map((e) => e.x),
+    datasets: [
+      {
+        label: series[0].key,
+        data: s.map((e) => e.value),
+        backgroundColor: backgrounds,
+      },
+    ],
+  };
+};
