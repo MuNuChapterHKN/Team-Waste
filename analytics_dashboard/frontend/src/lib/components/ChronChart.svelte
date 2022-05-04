@@ -1,21 +1,39 @@
+<script context="module" lang="ts">
+  export enum Granularity {
+    Day = "day",
+    Hour = "hour",
+    Minute = "minute",
+    Second = "second",
+  }
+</script>
+
 <script lang="ts">
   import Chart from "$lib/components/Chart.svelte";
   import { cachedCubeLoad } from "$lib/utils/cachingCubeClient";
   import { selectedColors } from "$lib/utils/colors";
   import { cubeDataToLineData } from "$lib/utils/mappers";
-  import type { Query, ResultSet } from "@cubejs-client/core";
+  import type { DateRange, Query, ResultSet } from "@cubejs-client/core";
 
   export let query: Query;
 
-  let granularity: "day" | "hour" | "minute" | "second" = "day";
+  let granularity: Granularity = Granularity.Day;
 
   const handleClick = () => {
-    granularity = granularity == "day" ? "hour" : "day";
+    granularity =
+      granularity === Granularity.Day ? Granularity.Hour : Granularity.Day;
   };
 
-  // TODO: limit number of datapoints
+  // const dateRange = {
+  //   hour: "Today",
+  //   day: "This month",
+  // };
+  query.limit = 48;
   $: query.timeDimensions = query.timeDimensions.map((td) => {
-    return { ...td, granularity: granularity };
+    return {
+      ...td,
+      granularity,
+      // dateRange: dateRange[granularity],
+    };
   });
 
   let fetched: ResultSet = null;
@@ -28,7 +46,9 @@
 
   $: loadData(query);
   $: data =
-    fetched === null ? null : cubeDataToLineData(fetched, $selectedColors);
+    fetched === null
+      ? null
+      : cubeDataToLineData(fetched, granularity, $selectedColors);
 </script>
 
 {#if data == null}
