@@ -1,12 +1,11 @@
 <script lang="ts">
   import Chart from "$lib/components/Chart.svelte";
   import { cachedCubeLoad } from "$lib/utils/cachingCubeClient";
+  import { selectedColors } from "$lib/utils/colors";
   import { cubeDataToLineData } from "$lib/utils/mappers";
   import type { Query, ResultSet } from "@cubejs-client/core";
-  import type { ChartData } from "chart.js";
 
   export let query: Query;
-  export let colors: string[] | string;
 
   let granularity: "day" | "hour" | "minute" | "second" = "day";
 
@@ -19,15 +18,17 @@
     return { ...td, granularity: granularity };
   });
 
-  let data: ChartData = null;
+  let fetched: ResultSet = null;
 
   const loadData = (q: Query) => {
     cachedCubeLoad(q)
-      .then((result) => (data = cubeDataToLineData(result, colors)))
+      .then((result) => (fetched = result))
       .catch(console.error);
   };
 
   $: loadData(query);
+  $: data =
+    fetched === null ? null : cubeDataToLineData(fetched, $selectedColors);
 </script>
 
 {#if data == null}

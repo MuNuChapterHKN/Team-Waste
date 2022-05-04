@@ -12,6 +12,8 @@
   // Types
   import type { Query } from "@cubejs-client/core";
   import PieChart from "$lib/components/PieChart.svelte";
+  import ColorChooser from "$lib/components/ColorChooser.svelte";
+  import { dev } from "$app/env";
 
   const exampleQuery: Query = {
     measures: ["infrared_sensor.activations"],
@@ -25,6 +27,10 @@
     dimensions: ["Bin.category"],
   };
 </script>
+
+{#if dev}
+  <ColorChooser />
+{/if}
 
 <h1 class="text-2xl font-medium mt-4">This is the homepage</h1>
 
@@ -47,7 +53,7 @@
 
 <Grid>
   <Cell>
-    <ChronChart query={exampleQuery} colors={undefined} />
+    <ChronChart query={exampleQuery} />
   </Cell>
   <Cell>
     <PieChart
@@ -58,7 +64,6 @@
         filters: [],
         dimensions: ["Bin.category"],
       }}
-      colors={undefined}
     />
   </Cell>
 </Grid>
