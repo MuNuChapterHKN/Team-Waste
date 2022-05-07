@@ -10,11 +10,17 @@
   const onClick = (option) => {
     dispatch("change", option);
     selected = option;
-  }
+  };
 </script>
 
 <div class="tabs">
-{#each options as option}
-  <div class="tab tab-bordered" class:tab-active={option === selected} on:click={() => onClick(option)} >{option.toString()}</div>
-{/each}
+  {#each options as option}
+    <div
+      class="tab tab-bordered"
+      class:tab-active={option === selected}
+      on:click={() => onClick(option)}
+    >
+      {option.toString()}
+    </div>
+  {/each}
 </div>

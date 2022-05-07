@@ -13,15 +13,14 @@
   import { selectedColors } from "$lib/utils/colors";
   import { cubeDataToLineData } from "$lib/utils/mappers";
   import type { DateRange, Query, ResultSet } from "@cubejs-client/core";
-import GranularitySelector from "./GranularitySelector.svelte";
+  import GranularitySelector from "./GranularitySelector.svelte";
 
   export let query: Query;
 
   let granularity: Granularity = Granularity.Day;
 
   const handleClick = (evt) => {
-    granularity =
-      evt.detail;
+    granularity = evt.detail;
   };
 
   // const dateRange = {
