@@ -13,14 +13,15 @@
   import { selectedColors } from "$lib/utils/colors";
   import { cubeDataToLineData } from "$lib/utils/mappers";
   import type { DateRange, Query, ResultSet } from "@cubejs-client/core";
+import GranularitySelector from "./GranularitySelector.svelte";
 
   export let query: Query;
 
   let granularity: Granularity = Granularity.Day;
 
-  const handleClick = () => {
+  const handleClick = (evt) => {
     granularity =
-      granularity === Granularity.Day ? Granularity.Hour : Granularity.Day;
+      evt.detail;
   };
 
   // const dateRange = {
@@ -54,6 +55,9 @@
 {#if data == null}
   <p class="p-5">Loading...</p>
 {:else}
-  <button on:click={handleClick}>switch granularity</button>
+  <GranularitySelector
+    options={[Granularity.Day, Granularity.Hour]}
+    on:change={handleClick}
+  />
   <Chart {data} type={"line"} />
 {/if}
