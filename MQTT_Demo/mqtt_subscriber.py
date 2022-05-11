@@ -11,9 +11,15 @@ def on_message(client, userdata, msg):
   if msg.payload.decode() == "Hello world!":
     print("Yes!")
     client.disconnect()
-    
+
+#it must be called before connect in order to see its effects
+def set_authentication_params(client,username,password):
+  client.username_pw_set('subscriber','subscriber')
+
 client = mqtt.Client()
-client.connect("localhost",1883,60)
+
+set_authentication_params(client,'subscriber','subscriber')
+client.connect("192.168.1.12",1883,60)
 
 client.on_connect = on_connect
 client.on_message = on_message
