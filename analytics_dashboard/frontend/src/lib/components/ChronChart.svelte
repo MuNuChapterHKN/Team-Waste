@@ -12,51 +12,62 @@
   import { cachedCubeLoad } from "$lib/utils/cachingCubeClient";
   import { selectedColors } from "$lib/utils/colors";
   import { cubeDataToLineData } from "$lib/utils/mappers";
-  import type { DateRange, Query, ResultSet } from "@cubejs-client/core";
+  import type { DateRange, Query } from "@cubejs-client/core";
+  import type { ChartData } from "chart.js";
+  import { onMount } from "svelte";
   import GranularitySelector from "./GranularitySelector.svelte";
 
   export let query: Query;
+  // This component is not reactive on this prop
+  const baseQuery = query;
 
-  let granularity: Granularity = Granularity.Day;
+  // State variable: ChartData shown in the chart
+  let chartData: ChartData = null;
 
-  const handleClick = (evt) => {
-    granularity = evt.detail;
+  // build a query with changed granularity
+  const buildQuery = (granularity: Granularity) => {
+    // const dateRange = {
+    //   hour: "Today",
+    //   day: "This month",
+    // };
+    const query = {
+      ...baseQuery,
+      limit: 48,
+      timeDimensions: baseQuery.timeDimensions.map((td) => ({
+        ...td,
+        granularity,
+        // dateRange: dateRange[granularity],
+      })),
+    };
+
+    return query;
   };
 
-  // const dateRange = {
-  //   hour: "Today",
-  //   day: "This month",
-  // };
-  query.limit = 48;
-  $: query.timeDimensions = query.timeDimensions.map((td) => {
-    return {
-      ...td,
-      granularity,
-      // dateRange: dateRange[granularity],
-    };
-  });
 
-  let fetched: ResultSet = null;
-
-  const loadData = (q: Query) => {
-    cachedCubeLoad(q)
-      .then((result) => (fetched = result))
+  // Fetchs and transform the data based on a given granularity, then it updates the state variable
+  const loadData = (granularity: Granularity) => {
+    const query = buildQuery(granularity);
+    cachedCubeLoad(query)
+      .then((result) => {
+        chartData = !!result
+          ? cubeDataToLineData(result, granularity, $selectedColors)
+          : null;
+      })
       .catch(console.error);
   };
 
-  $: loadData(query);
-  $: data =
-    fetched === null
-      ? null
-      : cubeDataToLineData(fetched, granularity, $selectedColors);
+  // Loads the initial data when the component is mounted
+  onMount(() => {
+    loadData(Granularity.Day);
+  });
 </script>
 
-{#if data == null}
+{#if chartData == null}
   <p class="p-5">Loading...</p>
 {:else}
   <GranularitySelector
     options={[Granularity.Day, Granularity.Hour]}
-    on:change={handleClick}
+    on:change={evt => loadData(evt.detail)}
   />
-  <Chart {data} type={"line"} />
+  <Chart data={chartData} type={"line"} />
 {/if}
