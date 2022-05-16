@@ -141,3 +141,4 @@ analytics_dashboard/frontend/static/styles.css
 analytics_dashboard/dev.sh
 
 .vscode
+*/**/.env*
